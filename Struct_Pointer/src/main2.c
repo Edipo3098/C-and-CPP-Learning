@@ -14,6 +14,9 @@ void print_student(const Student *s) {
 
 
 void GetBetterGrade( Student * students, int n) {
+    if (students == NULL || n <= 0) {
+        return;
+    }
     int best_index = 0;
 
     for (int i = 1; i < n; i++) {
@@ -28,6 +31,9 @@ void GetBetterGrade( Student * students, int n) {
 
 
 void GetBetterGrade_noMod( const Student * students, int n) {
+    if (students == NULL || n <= 0) {
+        return;
+    }
     int best_index = 0;
 
     for (int i = 1; i < n; i++) {

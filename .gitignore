@@ -6,3 +6,5 @@ build/
 .vscode/
 *.code-workspace
 XMacro/src/output.cpp
+
+tempCodeRunnerFile.cpp

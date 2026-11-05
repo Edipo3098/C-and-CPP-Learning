@@ -12,14 +12,13 @@ Car::Car() {
 }
 
 Car::Car(const char *brand, const char *model, int year, const Motor& motor, Motor *motor_ptr) {
-    std::strncpy(m_brand, brand, sizeof(m_brand) - 1);
+    std::strncpy(m_brand, brand != nullptr ? brand : "", sizeof(m_brand) - 1);
     m_brand[sizeof(m_brand) - 1] = '\0';
 
-    std::strncpy(m_model, model, sizeof(m_model) - 1);
+    std::strncpy(m_model, model != nullptr ? model : "", sizeof(m_model) - 1);
     m_model[sizeof(m_model) - 1] = '\0';
 
     m_year = year;
-    m_motor = motor;
     m_motor = motor;
     m_motor_ptr = motor_ptr;
 }
@@ -49,8 +48,8 @@ bool Car::tieneMasCaballosQue(const Car &other) const {
 
 bool Car::moreRPM(const Car* other) const {
 
-        if (other == nullptr) {
-            std::cerr << "Error: El puntero 'other' es nulo." << std::endl;
+        if (other == nullptr || m_motor_ptr == nullptr) {
+            std::cerr << "Error: La comparacion requiere un coche y un motor validos." << std::endl;
             return false; // O podrías lanzar una excepción dependiendo de tu diseño
         }
         else

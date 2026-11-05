@@ -35,7 +35,8 @@ void create_image() {
 }
 
 void rotation_2d(int& x, int& y, float theta) {
-    float rad = theta * M_PI / 180.0;
+    constexpr double pi = 3.14159265358979323846;
+    double rad = theta * pi / 180.0;
     int new_x = round(x * cos(rad) - y * sin(rad));
     int new_y = round(x * sin(rad) + y * cos(rad));
     x = new_x;

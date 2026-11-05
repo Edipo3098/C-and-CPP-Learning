@@ -5,7 +5,7 @@
 
 
 int main () {
-  float x = 2.3l,y=2.4;
+  float x = 2.3f, y = 2.4f;
   std::cout << x+ y<< std::endl;
 
   return 0;

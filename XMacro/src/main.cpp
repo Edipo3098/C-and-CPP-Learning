@@ -27,7 +27,7 @@ int main() {
     printf("Value of Apples: %d\n", Apples_function());
 
   
-    for( int i = 0; i < sizeof(FruitNames)/sizeof(FruitNames[0]); i++) {
+    for( size_t i = 0; i < sizeof(FruitNames)/sizeof(FruitNames[0]); i++) {
         printf("%s\n", FruitNames[i]);
         
     }

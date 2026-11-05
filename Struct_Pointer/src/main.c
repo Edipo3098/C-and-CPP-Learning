@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct{
-    char * name;
+    const char * name;
     int edad;
     float nota_media;
 }Student;
@@ -13,7 +13,11 @@ void print_student(Student *s){
 }
 
 int main(){
-    Student *s1 = (Student*) malloc(sizeof(Student)); 
+    Student *s1 = malloc(sizeof *s1);
+    if (s1 == NULL) {
+        fputs("Could not allocate student\n", stderr);
+        return EXIT_FAILURE;
+    } 
     s1->name = "Juan";
     s1->edad = 20;
     s1->nota_media = 8.5;

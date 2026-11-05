@@ -21,6 +21,6 @@ class Car{
         char m_model[20];
         int m_year;
         Motor m_motor;
-        Motor *m_motor_ptr;
+        Motor *m_motor_ptr = nullptr; // Non-owning: the caller keeps the motor alive.
 };
 #endif // __MOTOR_H__

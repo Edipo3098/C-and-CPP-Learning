@@ -1,14 +1,40 @@
 cmake_minimum_required(VERSION 3.15)
-project(ProyectosCPP)
+project(CAndCPPLearning LANGUAGES C CXX)
 
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 17)
-
-
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+if(MSVC)
+    add_compile_options(/W4 /utf-8)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
 add_subdirectory(SquareRotation)
 add_subdirectory(XMacro)
 add_subdirectory(Union)
 add_subdirectory(Struct_Pointer)
 add_subdirectory(MotorTest)
+add_subdirectory(Vector)
+
+include(CTest)
+if(BUILD_TESTING)
+    foreach(example MotorTest SquareRotation XMacro Union Struct_Pointer Struct_Pointer_2 VectorBasics VectorOperations VectorArithmetic)
+        add_test(NAME smoke_${example} COMMAND $<TARGET_FILE:${example}>)
+        set_tests_properties(smoke_${example} PROPERTIES TIMEOUT 10)
+    endforeach()
+    add_executable(car_regression tests/car_regression.cpp MotorTest/src/Car.cpp)
+    target_include_directories(car_regression PRIVATE MotorTest/inc)
+    add_test(NAME car_pointer_and_string_boundaries COMMAND car_regression)
+    foreach(case valid invalid)
+        add_test(NAME grades_${case} COMMAND ${CMAKE_COMMAND}
+            -DPROGRAM=$<TARGET_FILE:VectorGrades>
+            -DINPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/grades_${case}.txt
+            -DCASE=${case} -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_grades.cmake)
+    endforeach()
+endif()
